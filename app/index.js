@@ -5,6 +5,11 @@ import Home from './screens/Home'
 
 EStyleSheet.build({
   $primaryBlue: '#4F6D7A',
-  $white: '#FFF'
+  $white: '#FFF',
+  $border: '#E2E2E2',
+  $inputText: '#797979',
+  $lightGray: '#D9D9D9',
+
+  // $outline: 1, // 显示各种components的outline
 })
 export default () => <Home />

@@ -1,12 +1,19 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { KeyboardAvoidingView} from 'react-native'
+import {
+  View,
+  TouchableWithoutFeedback,
+  Keyboard
+} from 'react-native'
 import styles from './styles'
 
+// 将所有元素包裹在TouchableWithoutFeedback中，当点击键盘外时，dismiss the Keyboard
 const Container = ({ children }) => (
-  <KeyboardAvoidingView style={styles.container} behavior='padding'>
-    { children }
-  </KeyboardAvoidingView>
+  <TouchableWithoutFeedback onPress={Keyboard.dismiss}> 
+    <View style={styles.container}>
+      { children }
+    </View>
+  </TouchableWithoutFeedback>
 )
 
 Container.propTypes = {
