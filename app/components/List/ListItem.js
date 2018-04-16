@@ -15,7 +15,8 @@ const ListItem = ({
   onPress,
   checkmark = true,
   visible = true,
-  customIcon = null
+  customIcon = null,
+  iconBackground = null,
 }) => (
   <TouchableHighlight
     onPress={onPress}
@@ -23,7 +24,11 @@ const ListItem = ({
   >
     <View style={styles.row}>
       <Text style={styles.text}>{text}</Text>
-      {selected ? <Icon checkmark={checkmark} visible={visible}/> : <Icon />}
+      {
+        selected
+          ? <Icon checkmark={checkmark} visible={visible} iconBackground={iconBackground}/> 
+          : <Icon />
+      }
       {customIcon}
     </View>
   </TouchableHighlight>
@@ -36,6 +41,7 @@ ListItem.propTypes = {
   checkmark: PropTypes.bool,
   visiable: PropTypes.bool,
   customIcon: PropTypes.element,
+  iconBackground: PropTypes.string,
 }
 
 export default ListItem
