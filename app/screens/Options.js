@@ -5,6 +5,7 @@ import {
   Platform,
 } from 'react-native'
 import { Ionicons } from '@expo/vector-icons'
+import { PropTypes } from 'prop-types'
 
 import { ListItem, Separator } from '../components/List'
 
@@ -13,8 +14,12 @@ const ICON_SIZE = 23
 const ICON_PREFIX = (Platform.OS === 'ios') ? 'ios' : 'md'
 
 class Options extends Component {
+  static propTypes = {
+    navigation: PropTypes.object,
+  }
+
   handleThemesPress = () => {
-    console.log('press themes')
+    this.props.navigation.navigate('Themes', { title: 'Themes' })
   }
 
   handleSitePress = () => {
@@ -25,7 +30,7 @@ class Options extends Component {
     return (
       <ScrollView>
         <StatusBar translucent={false} barStyle='default' />
-        <ListItem 
+        <ListItem
           text='Themes'
           onPress={this.handleThemesPress}
           customIcon={
@@ -37,7 +42,7 @@ class Options extends Component {
           }
         />
         <Separator />
-        <ListItem 
+        <ListItem
           text='Fixer.io'
           onPress={this.handleSitePress}
           customIcon={

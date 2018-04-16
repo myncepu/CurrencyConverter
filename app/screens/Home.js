@@ -41,7 +41,7 @@ export default class Home extends Component {
   }
 
   handleOptionPress = () => {
-    console.log('press option button')
+    this.props.navigation.navigate('Options', { title: 'Options' })
   }
   render() {
     return (
