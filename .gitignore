@@ -3,6 +3,9 @@
 # expo
 .expo/
 
+# ternjs
+.tern-project
+
 # dependencies
 /node_modules
 
