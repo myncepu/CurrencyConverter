@@ -3,6 +3,7 @@ import {
   StatusBar,
   KeyboardAvoidingView,
 } from 'react-native'
+import PropTypes from 'prop-types'
 
 import { Header } from '../components/Header'
 import { Container } from '../components/Container'
@@ -19,12 +20,16 @@ const TEMP_CONVERSION_RATE = 0.7974
 const TEMP_CONVERSION_DATE = new Date()
 
 export default class Home extends Component {
+  static propTypes = {
+    navigation: PropTypes.object,
+  }
+
   handleBaseCurrency = () => {
-    console.log('press base')
+    this.props.navigation.navigate('CurrencyList', { title: 'Base Currency' })
   }
 
   handleQuoteCurrency = () => {
-    console.log('press quote')
+    this.props.navigation.navigate('CurrencyList', { title: 'Quote Currency' })
   }
 
   handleTextChange = (text) => {

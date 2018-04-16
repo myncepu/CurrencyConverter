@@ -4,6 +4,7 @@ import {
   View,
   StatusBar,
 } from 'react-native'
+import PropTypes from 'prop-types'
 
 import { ListItem, Separator } from '../components/List'
 // 下面写法报错，debug了好久
@@ -13,8 +14,13 @@ import currencies from '../data/currencies'
 const TEMP_CURRENT_CURRENCY = 'CAD'
 
 class CurrencyList extends Component {
+
+  static propTypes = {
+    navigation: PropTypes.object,
+  }
+
   handlePress = () => {
-    console.log('row press')
+    this.props.navigation.goBack(null)
   }
 
   render() {
