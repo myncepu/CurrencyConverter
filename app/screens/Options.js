@@ -7,6 +7,7 @@ import {
 } from 'react-native'
 import { Ionicons } from '@expo/vector-icons'
 import { PropTypes } from 'prop-types'
+import { connectAlert } from '../components/Alert'
 
 import { ListItem, Separator } from '../components/List'
 
@@ -17,6 +18,7 @@ const ICON_PREFIX = (Platform.OS === 'ios') ? 'ios' : 'md'
 class Options extends Component {
   static propTypes = {
     navigation: PropTypes.object,
+    alertWithType: PropTypes.func,
   }
 
   handleThemesPress = () => {
@@ -24,7 +26,10 @@ class Options extends Component {
   }
 
   handleSitePress = () => {
-    Linking.openURL('https://fixer.io').catch(() => alert('An error occured!'))
+    Linking.openURL(
+      'https://fixer.io').catch(() =>
+      this.props.alertWithType('error','Sorry!', 'Fixer.io cann\'t be opened now')
+    )
   }
 
   render() {
@@ -60,4 +65,4 @@ class Options extends Component {
   }
 }
 
-export default Options
+export default connectAlert(Options)
