@@ -13,16 +13,17 @@ import { ListItem, Separator } from '../components/List'
 import currencies from '../data/currencies'
 import { changeBaseCurrency, changeQuoteCurrency } from '../actions/currencies'
 
-const TEMP_CURRENT_CURRENCY = 'CAD'
-
 class CurrencyList extends Component {
   static propTypes = {
     navigation: PropTypes.object,
     dispatch: PropTypes.func,
+    baseCurrency: PropTypes.string,
+    quoteCurrency: PropTypes.string,
   }
 
   handlePress = (currency) => {
     const { type } = this.props.navigation.state.params
+
     if (type === 'base') {
       // TODO: dispatch change base
       this.props.dispatch(changeBaseCurrency(currency))
@@ -34,6 +35,11 @@ class CurrencyList extends Component {
   }
 
   render() {
+    let currentCurrency = this.props.baseCurrency
+    if (this.props.navigation.state.params.type === 'quote') {
+      currentCurrency = this.props.quoteCurrency
+    }
+
     return (
       <View style={{ flex: 1 }}>
         <StatusBar
@@ -45,7 +51,7 @@ class CurrencyList extends Component {
           renderItem={({ item }) => (
             <ListItem
               text={item}
-              selected={item === TEMP_CURRENT_CURRENCY}
+              selected={item === currentCurrency}
               onPress={() => this.handlePress(item)}
             />
           )}
@@ -59,4 +65,9 @@ class CurrencyList extends Component {
 
 // TODO: 为什么Home.js中 connect(stateToProps)(CurrencyList)
 // 这里第一个参数不用填写
-export default connect()(CurrencyList)
+const mapStateToProps = (state) => ({
+  baseCurrency: state.currencies.baseCurrency,
+  quoteCurrency: state.currencies.quoteCurrency,
+})
+
+export default connect(mapStateToProps)(CurrencyList)
