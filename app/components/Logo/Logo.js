@@ -7,11 +7,16 @@ import {
   StyleSheet,
   Platform,
 } from 'react-native'
+import PropTypes from 'prop-types'
+
 import styles from './styles'
 
 const ANIMATIONN_DURATION = 250
 
 class Logo extends Component {
+  static propTypes = {
+    tintColor: PropTypes.string,
+  }
 
   constructor(porps) {
     super(porps)
@@ -79,6 +84,7 @@ class Logo extends Component {
         width: this.imageWidth,
         height: this.imageWidth,
       },
+      this.props.tintColor ? ({ tintColor: this.props.tintColor }) : null,
     ]
 
     return (

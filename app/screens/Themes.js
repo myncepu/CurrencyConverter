@@ -5,8 +5,10 @@ import {
 } from 'react-native'
 import EStyleSheet from 'react-native-extended-stylesheet'
 import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
 
 import { ListItem, Separator } from '../components/List'
+import { changePrimaryColor } from '../actions/theme'
 
 const styles = EStyleSheet.create({
   $blue: '$primaryBlue',
@@ -18,11 +20,12 @@ const styles = EStyleSheet.create({
 class Themes extends Component {
   static propTypes = {
     navigation: PropTypes.object,
+    dispatch: PropTypes.func,
   }
 
   handleThemePress = (color) => {
-    // console.log('press themes', color)
-    this.props.navigation.goBack(null)
+    this.props.dispatch(changePrimaryColor(color))
+    this.props.navigation.goBack()
   }
 
   render() {
@@ -66,4 +69,8 @@ class Themes extends Component {
   }
 }
 
-export default Themes
+const mapStateToProps = (state) => ({
+  primaryColor: state.theme.primaryColor
+})
+
+export default connect(mapStateToProps)(Themes)
