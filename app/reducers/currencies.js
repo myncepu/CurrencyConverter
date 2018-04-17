@@ -1,6 +1,8 @@
 import {
   SWAP_CURRENCY,
   CHANGE_CURRENCY_AMOUNT,
+  CHANGE_BASE_CURRRENCY,
+  CHANGE_QUOTE_CURRENCY,
 } from '../actions/currencies'
 
 const initialState = {
@@ -49,6 +51,23 @@ const initialState = {
   },
 }
 
+const setConversion = (state, action) => {
+  let conversion = {
+    isFetching: true,
+    date: '',
+    rates: {},
+  }
+
+  if (state.conversions[action.currency]) {
+    conversion = state.conversions[action.currency]
+  }
+
+  return {
+    ...state.conversions,
+    // [xx]: xx 这个语法是什么意思?
+    [action.currency]: conversion,
+  }
+}
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case CHANGE_CURRENCY_AMOUNT:
@@ -61,6 +80,18 @@ const reducer = (state = initialState, action) => {
         ...state,
         baseCurrency: state.quoteCurrency,
         quoteCurrency: state.baseCurrency,
+      }
+    case CHANGE_BASE_CURRRENCY:
+      return {
+        ...state,
+        baseCurrency: action.currency,
+        conversions: setConversion(state, action)
+      }
+    case CHANGE_QUOTE_CURRENCY:
+      return {
+        ...state,
+        quoteCurrency: action.currency,
+        conversions: setConversion(state, action)
       }
     default:
       return state

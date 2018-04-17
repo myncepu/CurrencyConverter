@@ -57,4 +57,6 @@ class CurrencyList extends Component {
   }
 }
 
+// TODO: 为什么Home.js中 connect(stateToProps)(CurrencyList)
+// 这里第一个参数不用填写
 export default connect()(CurrencyList)
