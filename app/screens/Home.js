@@ -4,6 +4,7 @@ import {
   KeyboardAvoidingView,
 } from 'react-native'
 import PropTypes from 'prop-types'
+import { connect } from 'react-redux' // Let the component know the redux
 
 import { Header } from '../components/Header'
 import { Container } from '../components/Container'
@@ -21,7 +22,7 @@ const TEMP_QUOTE_PRICE = '79.74'
 const TEMP_CONVERSION_RATE = 0.7974
 const TEMP_CONVERSION_DATE = new Date()
 
-export default class Home extends Component {
+class Home extends Component {
   static propTypes = {
     navigation: PropTypes.object,
     dispatch: PropTypes.func,
@@ -36,16 +37,11 @@ export default class Home extends Component {
   }
 
   handleTextChange = (amount) => {
-    // console.log('change amount', amount)
-    // TODO: Make this actually work with this.props.dispatch
-    // this.prop.dispatch(changeCurrency())
-    console.log(changeCurrency(amount))
+    this.props.dispatch(changeCurrency(amount))
   }
 
   handleSwapCurrency = () => {
-    // TODO: Make this actually work with this.props.dispatch
-    // this.prop.dispatch(swapCurrency())
-    console.log(swapCurrency())
+    this.props.dispatch(swapCurrency())
   }
 
   handleOptionPress = () => {
@@ -86,3 +82,5 @@ export default class Home extends Component {
     )
   }
 }
+
+export default connect()(Home)
